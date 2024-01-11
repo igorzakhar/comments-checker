@@ -35,14 +35,12 @@ def _clean_text(content):
 def _clean_word(word):
     word = word.replace('«', '').replace('»', '').replace('…', '')
     word = word.replace('„', '').replace('“', '')
-    # word = word.strip(string.punctuation)
     return word
 
 
 def split_by_words(morph, content):
     words = set()
     text = _clean_text(content)
-    # logging.debug(f'{content}\n{text}')
     for word in text.split():
         cleaned_word = _clean_word(word)
         normalized_word = morph.parse(cleaned_word)[0].normal_form
