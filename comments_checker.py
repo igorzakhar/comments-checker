@@ -88,7 +88,7 @@ def main():
     logging.getLogger('pymorphy2').setLevel(logging.WARNING)
     logging.basicConfig(
         format='\u2192 %(message)s',
-        level=logging.DEBUG,
+        level=logging.INFO,
     )
 
     morph = pymorphy2.MorphAnalyzer()
@@ -106,8 +106,6 @@ def main():
     if url_path[-1] != 'comments':
         link = f'{url.scheme}://{url.netloc}/{"/".join(url_path)}/comments/'
 
-    link = f'{link}' if link.endswith("/") else f'{link}/'
-
     resp = requests.get(link)
 
     comments = parse_comments(resp.text)
@@ -123,10 +121,10 @@ def main():
                 f'{link}#comment_{comment.id}\n'
                 f'{comment.body}\nDetected words: {detected_words}\n{"-" * 40}'
             )
-            logging.debug(debug_msg)
+            logging.info(debug_msg)
             found_comments += 1
-    logging.debug(f'Found comments: {found_comments}')
-    logging.debug(f'Total comments: {len(comments)}')
+    logging.info(f'Found comments: {found_comments}')
+    logging.info(f'Total comments: {len(comments)}')
 
 
 if __name__ == '__main__':
