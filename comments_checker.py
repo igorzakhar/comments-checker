@@ -17,7 +17,8 @@ from bs4 import BeautifulSoup
 def merge_dictionaries(directory='dicts'):
     words = set()
     for filename in os.listdir(os.path.abspath(directory)):
-        with open(f'{directory}/{filename}', 'r') as fp:
+        filepath = os.path.join(directory, filename)
+        with open(filepath, 'r') as fp:
             lines = [
                 line.strip().replace('ё', 'е')
                 for line in fp.readlines()
